@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}My Profile - Library Application{% endblock %}
+
+{% block nav_profile %}active{% endblock %}
+
+{% block content %}
+<h1 class="mt-4">My Reading List</h1>
+
+{% if read_books %}
+<table class="table table-striped table-hover mt-3">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Genre</th>
+            <th scope="col">Year</th>
+            <th scope="col">My Rating</th>
+            <th scope="col">Date Added</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for read_book in read_books %}
+        <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{read_book.book.title}}</td>
+            <td>{{read_book.book.author}}</td>
+            <td><span class="badge badge-info">{{read_book.book.get_genre_display}}</span></td>
+            <td>{{read_book.book.year}}</td>
+            <td>
+                <span class="text-warning">
+                    {% for i in "12345" %}
+                        {% if forloop.counter <= read_book.rating %}★{% else %}☆{% endif %}
+                    {% endfor %}
+                </span>
+            </td>
+            <td>{{read_book.date_added|date:"M d, Y"}}</td>
+            <td>
+                <a href="{% url 'books:remove-read-book' readbook_id=read_book.id %}"><button type="button" class="btn btn-danger btn-sm" onclick="return confirm('Remove this book from your reading list?')">Remove</button></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="alert alert-info text-center mt-3" role="alert">
+    You haven't marked any books as read yet. <a href="{% url 'books:catalog' %}" class="alert-link">Browse Catalog</a>
+</div>
+{% endif %}
+{% endblock %}

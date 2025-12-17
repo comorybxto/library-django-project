@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+
+# Django
+media/
+static/
+
+# Environments
+.env
+venv/
+.venv/
+
+# OS / editor
+.DS_Store
+
+# Backups / exports
+*.zip
+*.csv
+
+# PythonAnywhere / system
+.cache/
+.ipython/
+.local/
+.virtualenvs/
