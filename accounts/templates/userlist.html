@@ -20,7 +20,10 @@
         {% for profile_user in users %}
         <tr>
             <th scope="row">{{forloop.counter}}</th>
-            <td>{{profile_user.username}}</td>
+            <td>
+                <img src="{{ profile_user.avatar.url }}" alt="{{ profile_user.username }}" class="user-list-avatar">
+                {{ profile_user.username }}
+            </td>
             <td>
                 {% if profile_user.user_type == 'librarian' %}
                 <span class="badge badge-primary">Librarian</span>

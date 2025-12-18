@@ -6,10 +6,21 @@ class User(AbstractUser):
         ('reader', 'Reader'),
         ('librarian', 'Librarian'),
     )
-    user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES, default='reader')
-    
+
+    user_type = models.CharField(
+        max_length=10,
+        choices=USER_TYPE_CHOICES,
+        default='reader'
+    )
+
+    avatar = models.ImageField(
+        upload_to='',
+        default='avatar.jpg',
+        editable=False
+    )
+
     def __str__(self):
         return f"{self.username} ({self.user_type})"
-    
+
     class Meta:
         db_table = 'accounts_user'
